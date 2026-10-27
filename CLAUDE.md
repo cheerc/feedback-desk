@@ -27,7 +27,7 @@ npm run dev            # 本機 wrangler dev，用 wrangler.dev.jsonc 的本機 
 
 ## 部署路徑（不是從這個目錄部署）
 
-- 部署者在自己的部署資料夾（含 `wrangler.jsonc`）執行 `npx --allow-git=all github:aixwangtw/feedback-desk deploy`。CLI 會把 `dist/worker`、`dist/public`、`migrations/` 複製到部署資料夾的 `.feedback-desk/`（已在 `.gitignore`），再呼叫 wrangler。
+- 部署者在自己的部署資料夾（含 `wrangler.jsonc`）執行 `npx --allow-git=all github:cheerc/feedback-desk deploy`。CLI 會把 `dist/worker`、`dist/public`、`migrations/` 複製到部署資料夾的 `.feedback-desk/`（已在 `.gitignore`），再呼叫 wrangler。
 - 所以改了 Worker 或前端程式後，要 `npm run build` 再部署；這個 repo 根目錄的 `wrangler.jsonc` 只是 `init` 產生結果的範例，不要從這裡直接 `wrangler deploy`。
 
 ## 架構（大局）
@@ -69,13 +69,13 @@ npm run dev            # 本機 wrangler dev，用 wrangler.dev.jsonc 的本機 
 
 ### 連線
 
-- MCP 只在使用者自己的電腦安裝：`npx --allow-git=all github:aixwangtw/feedback-desk mcp install --claude --codex --scope user`。
+- MCP 只在使用者自己的電腦安裝：`npx --allow-git=all github:cheerc/feedback-desk mcp install --claude --codex --scope user`。
   - 會撤銷上一次的 token，不要為了「重新整理」而重跑。
   - 不接受 `--scope project`，token 會進版控。
 - Claude Code：`/mcp` 或 `claude mcp list` 顯示 `feedback-desk` 已連線。
 - Codex CLI：`codex mcp list` 顯示 `feedback-desk` enabled。
 - MCP 工具以 Claude Code 實際列出的為準（名稱格式為 `mcp__feedback-desk__<工具>`）。
-- MCP 不可用時改用命令列：`npx --allow-git=all github:aixwangtw/feedback-desk reports <slug> --json`。這需要本機已 `login`；沒有 login 就停下來告訴使用者，不要要使用者貼 token。
+- MCP 不可用時改用命令列：`npx --allow-git=all github:cheerc/feedback-desk reports <slug> --json`。這需要本機已 `login`；沒有 login 就停下來告訴使用者，不要要使用者貼 token。
 - 兩者都不能用時，停下來告訴使用者，不要假裝已經查過。
 
 ### 處理回報單
